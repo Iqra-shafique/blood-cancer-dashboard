@@ -289,7 +289,11 @@ def show_home():
     with col2:
         if st.button("🔄 Load Dataset", key="load_btn", use_container_width=True):
             with st.spinner("Loading data..."):
-                file_path = r"c:\Users\User\Desktop\assignment\Assignment\Blood Cancer Diseases dataset  - Sheet1.csv"
+                # Try relative path first (for Streamlit Cloud), then absolute path (for local)
+                import os
+                file_path = "Blood Cancer Diseases dataset  - Sheet1.csv"
+                if not os.path.exists(file_path):
+                    file_path = r"c:\Users\User\Desktop\assignment\Assignment\Blood Cancer Diseases dataset  - Sheet1.csv"
                 df, error = load_data(file_path)
                 
                 if error:
